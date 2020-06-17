@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: metrics-server
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: kube-system
+    server: {{ .Values.cluster }}
+  project: {{ .Values.project }}
+  source:
+    chart: metrics-server
+    helm:
+      valueFiles:
+      - values.yaml
+      - metrics-server.yaml
+    repoURL: https://kubernetes-charts.storage.googleapis.com/
+    targetRevision: 0.3.6

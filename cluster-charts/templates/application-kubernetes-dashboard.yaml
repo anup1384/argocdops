@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: elasticsearch
+  name: kubernetes-dashboard
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -11,10 +11,10 @@ spec:
     server: {{ .Values.cluster }}
   project: {{ .Values.project }}
   source:
-    chart: 
+    chart: kubernetes-dashboard
     helm:
       valueFiles:
       - values.yaml
-      - cluster-autoscaler.yaml
+      - 
     repoURL: https://kubernetes-charts.storage.googleapis.com/
-    targetRevision: 1.16.4
+    targetRevision: 1.10.1
