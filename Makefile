@@ -1,4 +1,4 @@
-.PHONY: install-argocd get-argocd-password get-grafana-password proxy-argocd-ui check-argocd-ready
+.PHONY: install-argocd get-argocd-password proxy-argocd-ui check-argocd-ready
 
 list:
 	@$(MAKE) -pRrq -f $(lastword $(MAKEFILE_LIST)) : 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$'
@@ -13,7 +13,7 @@ check-argocd-ready:
 	kubectl wait --for=condition=available deployment -l "app.kubernetes.io/name=argocd-server" -n argocd --timeout=300s
 
 proxy-argocd-ui:
-	kubectl port-forward svc/argocd-server -n argocd 8080:443 &
+	kubectl port-forward svc/argocd-server -n argocd 8090:443 &
 
 install-argocd:
 	kubectl create ns argocd || true
