@@ -16,10 +16,11 @@ proxy-argocd-ui:
 install-argocd:
 	kubectl create ns argocd || true
 	kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-	kubectl apply -f resources/application-bootstrap.yaml -n argocd
 
 install-arocd-ha:
 	kubectl create ns argocd || true
 	kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/ha/install.yaml
-	kubectl apply -f resources/application-bootstrap.yaml -n argocd
+
+bootstrap:
+        kubectl apply -f resources/application-bootstrap.yaml -n argocd
 
