@@ -11,7 +11,7 @@ argocd-status:
 	kubectl wait --for=condition=available deployment -l "app.kubernetes.io/name=argocd-server" -n argocd --timeout=300s
 
 proxy-argocd-ui:
-	kubectl port-forward svc/argocd-server -n argocd 8092:443 &
+	kubectl port-forward svc/argocd-server -n argocd 8080:443 &
 
 install-argocd:
 	kubectl create ns argocd || true
